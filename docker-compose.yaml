@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: my-postgres
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: qwer
+      POSTGRES_DB: mydb
+    ports:
+      - '5432:5432'
+    volumes:
+      - my-postgres-data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+  backend:
+    build: .
+    container_name: my-backend
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    ports:
+      - '3000:3000'
+    command: npm run dev
+
+volumes:
+  my-postgres-data:
