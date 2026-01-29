@@ -1,0 +1,54 @@
+# Dependencies
+/node_modules
+.pnp
+.pnp.js
+.yarn-integrity
+.bin
+.npm
+.yarn-cache
+
+# Testing
+/coverage
+/.nyc_output
+/mocha.opts
+/testem.yml
+/junit.xml
+/.grunt
+/protractor.conf.js
+/protractor.conf.coffee
+/.c9/
+/.node-spawn-errors.log
+
+# Production
+/build
+/dist
+/npm-debug.log*
+/yarn-debug.log*
+/yarn-error.log*
+/static-dist/
+
+# Environment
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+.eslintcache
+
+# TypeScript
+*.tsbuildinfo
+
+# Editors & OS
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.user
+*.resource
+*.tmp
+*.log
+*.lock
