@@ -1,0 +1,41 @@
+name: Build, Push Docker Image & Deploy to Kubernetes
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+
+jobs:
+  build-push-deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and Push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            sej1991/my-node:latest
+            sej1991/my-node:${{ github.ref_name }}
+
+      - name: Deploy to Kubernetes
+        run: |
+          export KUBECONFIG=/home/vagrant/.kube/config
+          kubectl set image deployment/my-node my-node=sej1991/my-node:${{ github.ref_name }}
+          kubectl rollout status deployment/my-node
+          kubectl get pods -o wide
