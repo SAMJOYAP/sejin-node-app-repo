@@ -5,11 +5,7 @@ import cors from 'cors';
 const app = express();
 const PORT = 3000;
 
-app.use(
-  cors({
-    origin: ['http://localhost:8080', 'http://192.168.76.11:32333'], // 프론트 주소
-  }),
-);
+app.use(cors());
 
 export const pool = new Pool({
   host: process.env.POSTGRES_HOST,
@@ -58,6 +54,6 @@ app.post('/api/count', async (req: Request, res: Response) => {
   }
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
