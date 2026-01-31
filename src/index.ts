@@ -16,7 +16,7 @@ export const pool = new Pool({
 });
 
 app.get('/api', (req: Request, res: Response) => {
-  res.send('Hello Express + TypeScript!');
+  res.send('Hello Express + TypeScript!!!');
 });
 
 app.get('/api/count', async (req: Request, res: Response) => {
