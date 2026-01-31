@@ -7,7 +7,7 @@ const PORT = 3000;
 
 app.use(
   cors({
-    origin: ['*'], // 프론트 주소
+    origin: ['http://localhost:8080', 'http://192.168.76.11:32333'], // 프론트 주소
   }),
 );
 
